@@ -1,16 +1,11 @@
-"use client"
+'use client'
 
-import { createContext, useContext, type ReactNode } from "react"
+import * as React from 'react'
+import {
+  ThemeProvider as NextThemesProvider,
+  type ThemeProviderProps,
+} from 'next-themes'
 
-type ThemeProviderProps = {
-  children: ReactNode
+export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
+  return <NextThemesProvider {...props}>{children}</NextThemesProvider>
 }
-
-const ThemeContext = createContext({ theme: "dark" })
-
-export function ThemeProvider({ children }: ThemeProviderProps) {
-  // 고정된 다크 테마 사용
-  return <ThemeContext.Provider value={{ theme: "dark" }}>{children}</ThemeContext.Provider>
-}
-
-export const useTheme = () => useContext(ThemeContext)
